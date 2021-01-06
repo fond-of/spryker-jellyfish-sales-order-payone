@@ -46,10 +46,11 @@ class JellyfishOrderPaymentExpanderPostMapPlugin extends AbstractPlugin implemen
 
         foreach ($salesOrder->getOrdersJoinSalesPaymentMethodType() as $salesPayment) {
             foreach ($payments as $paymentTransfer) {
+                $paymentMethodType = $salesPayment->getSalesPaymentMethodType();
                 if (
                     $paymentTransfer->getAmount() === $salesPayment->getAmount()
-                    && $paymentTransfer->getProvider() === $salesPayment->getSalesPaymentMethodType()->getPaymentProvider()
-                    && $paymentTransfer->getMethod() === $salesPayment->getSalesPaymentMethodType()->getPaymentMethod()
+                    && $paymentTransfer->getProvider() === $paymentMethodType->getPaymentProvider()
+                    && $paymentTransfer->getMethod() === $paymentMethodType->getPaymentMethod()
                 ) {
                     $paymentTransfer->setTransactionId($this->getTransactionId($salesPayment->getIdSalesPayment()));
                 }
