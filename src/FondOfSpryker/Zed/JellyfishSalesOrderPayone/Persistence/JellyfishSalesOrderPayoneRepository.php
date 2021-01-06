@@ -12,23 +12,22 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 class JellyfishSalesOrderPayoneRepository extends AbstractRepository implements JellyfishSalesOrderPayoneRepositoryInterface
 {
     /**
-     * @param  int  $idSalesPayment
+     * @param int $idSalesPayment
      *
      * @return \Generated\Shared\Transfer\SalesPaymentTransfer
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findSalesPaymentByIdSalesPayment(int $idSalesPayment): SalesPaymentTransfer
     {
         $salesPaymentEntity = $this->getFactory()->createSalesPaymentQuery()
             ->filterByIdSalesPayment($idSalesPayment)->findOne();
+
         return (new SalesPaymentTransfer())->fromArray($salesPaymentEntity->toArray(), true);
     }
 
     /**
-     * @param  int  $idSalesOrder
+     * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\PayonePaymentTransfer
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findPaymentPayoneByIdSalesOrder(int $idSalesOrder): PayonePaymentTransfer
     {
@@ -39,10 +38,9 @@ class JellyfishSalesOrderPayoneRepository extends AbstractRepository implements 
     }
 
     /**
-     * @param  int  $idSalesPayment
+     * @param int $idSalesPayment
      *
      * @return string
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findPaymentTransactionIdByIdSalesPayment(int $idSalesPayment): string
     {

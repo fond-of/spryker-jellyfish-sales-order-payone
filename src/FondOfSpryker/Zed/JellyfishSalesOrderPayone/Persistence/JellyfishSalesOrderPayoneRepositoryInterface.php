@@ -8,26 +8,29 @@ use Generated\Shared\Transfer\SalesPaymentTransfer;
 interface JellyfishSalesOrderPayoneRepositoryInterface
 {
     /**
-     * @param  int  $idSalesPayment
+     * @param int $idSalesPayment
+     *
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      *
      * @return \Generated\Shared\Transfer\SalesPaymentTransfer
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findSalesPaymentByIdSalesPayment(int $idSalesPayment): SalesPaymentTransfer;
 
     /**
-     * @param  int  $idSalesOrder
+     * @param int $idSalesOrder
+     *
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      *
      * @return \Generated\Shared\Transfer\PayonePaymentTransfer
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findPaymentPayoneByIdSalesOrder(int $idSalesOrder): PayonePaymentTransfer;
 
     /**
-     * @param  int  $idSalesPayment
+     * @param int $idSalesPayment
+     *
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      *
      * @return string
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findPaymentTransactionIdByIdSalesPayment(int $idSalesPayment): string;
 }

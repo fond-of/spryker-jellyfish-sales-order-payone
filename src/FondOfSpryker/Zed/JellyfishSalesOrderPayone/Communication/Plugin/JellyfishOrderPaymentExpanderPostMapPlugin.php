@@ -19,8 +19,8 @@ class JellyfishOrderPaymentExpanderPostMapPlugin extends AbstractPlugin implemen
     protected $transactionIds = [];
 
     /**
-     * @param  \Generated\Shared\Transfer\JellyfishOrderTransfer  $jellyfishOrderTransfer
-     * @param  \Orm\Zed\Sales\Persistence\SpySalesOrder  $salesOrder
+     * @param \Generated\Shared\Transfer\JellyfishOrderTransfer $jellyfishOrderTransfer
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $salesOrder
      *
      * @return \Generated\Shared\Transfer\JellyfishOrderTransfer
      */
@@ -35,12 +35,10 @@ class JellyfishOrderPaymentExpanderPostMapPlugin extends AbstractPlugin implemen
     }
 
     /**
-     * @param  \ArrayObject  $payments
-     * @param  \Orm\Zed\Sales\Persistence\SpySalesOrder  $salesOrder
+     * @param \ArrayObject $payments
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $salesOrder
      *
      * @return \ArrayObject
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     protected function updatePayments(ArrayObject $payments, SpySalesOrder $salesOrder): ArrayObject
     {
@@ -64,14 +62,13 @@ class JellyfishOrderPaymentExpanderPostMapPlugin extends AbstractPlugin implemen
     }
 
     /**
-     * @param  int  $idSalesOrder
+     * @param int $idSalesOrder
      *
      * @return string
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     protected function getTransactionId(int $idSalesOrder): string
     {
-        if (array_key_exists($idSalesOrder, $this->transactionIds) === false){
+        if (array_key_exists($idSalesOrder, $this->transactionIds) === false) {
             $this->transactionIds[$idSalesOrder] = $this->getRepository()->findPaymentTransactionIdByIdSalesPayment($idSalesOrder);
         }
 
