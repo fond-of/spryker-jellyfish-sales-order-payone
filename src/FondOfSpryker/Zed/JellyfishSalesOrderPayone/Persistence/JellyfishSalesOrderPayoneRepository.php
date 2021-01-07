@@ -54,7 +54,7 @@ class JellyfishSalesOrderPayoneRepository extends AbstractRepository implements 
     {
         $salesPaymentTransfer = $this->findSalesPaymentByIdSalesPayment($idSalesPayment);
 
-        if ($salesPaymentTransfer === null || $salesPaymentTransfer->getFkSalesOrder()) {
+        if ($salesPaymentTransfer === null || $salesPaymentTransfer->getFkSalesOrder() === null) {
             return '';
         }
 
