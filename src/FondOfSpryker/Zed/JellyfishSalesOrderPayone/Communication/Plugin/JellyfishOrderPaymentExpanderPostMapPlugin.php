@@ -63,16 +63,16 @@ class JellyfishOrderPaymentExpanderPostMapPlugin extends AbstractPlugin implemen
     }
 
     /**
-     * @param int $idSalesOrder
+     * @param int $idSalesPayment
      *
      * @return string
      */
-    protected function getTransactionId(int $idSalesOrder): string
+    protected function getTransactionId(int $idSalesPayment): string
     {
-        if (array_key_exists($idSalesOrder, $this->transactionIds) === false) {
-            $this->transactionIds[$idSalesOrder] = $this->getRepository()->findPaymentTransactionIdByIdSalesPayment($idSalesOrder);
+        if (array_key_exists($idSalesPayment, $this->transactionIds) === false) {
+            $this->transactionIds[$idSalesPayment] = $this->getRepository()->findPaymentTransactionIdByIdSalesPayment($idSalesPayment);
         }
 
-        return $this->transactionIds[$idSalesOrder];
+        return $this->transactionIds[$idSalesPayment];
     }
 }
