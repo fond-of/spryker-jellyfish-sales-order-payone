@@ -14,12 +14,16 @@ class JellyfishSalesOrderPayoneRepository extends AbstractRepository implements 
     /**
      * @param int $idSalesPayment
      *
-     * @return \Generated\Shared\Transfer\SalesPaymentTransfer
+     * @return \Generated\Shared\Transfer\SalesPaymentTransfer|null
      */
-    public function findSalesPaymentByIdSalesPayment(int $idSalesPayment): SalesPaymentTransfer
+    public function findSalesPaymentByIdSalesPayment(int $idSalesPayment): ?SalesPaymentTransfer
     {
         $salesPaymentEntity = $this->getFactory()->createSalesPaymentQuery()
             ->filterByIdSalesPayment($idSalesPayment)->findOne();
+
+        if ($salesPaymentEntity === null) {
+            return null;
+        }
 
         return (new SalesPaymentTransfer())->fromArray($salesPaymentEntity->toArray(), true);
     }
@@ -27,14 +31,18 @@ class JellyfishSalesOrderPayoneRepository extends AbstractRepository implements 
     /**
      * @param int $idSalesOrder
      *
-     * @return \Generated\Shared\Transfer\PayonePaymentTransfer
+     * @return \Generated\Shared\Transfer\PayonePaymentTransfer|null
      */
-    public function findPaymentPayoneByIdSalesOrder(int $idSalesOrder): PayonePaymentTransfer
+    public function findPaymentPayoneByIdSalesOrder(int $idSalesOrder): ?PayonePaymentTransfer
     {
-        $entity = $this->getFactory()->createPaymentPayoneQuery()
+        $payonePaymentEntity = $this->getFactory()->createPaymentPayoneQuery()
             ->filterByFkSalesOrder($idSalesOrder)->findOne();
 
-        return (new PayonePaymentTransfer())->fromArray($entity->toArray(), true);
+        if ($payonePaymentEntity === null) {
+            return null;
+        }
+
+        return (new PayonePaymentTransfer())->fromArray($payonePaymentEntity->toArray(), true);
     }
 
     /**
@@ -46,9 +54,13 @@ class JellyfishSalesOrderPayoneRepository extends AbstractRepository implements 
     {
         $salesPaymentTransfer = $this->findSalesPaymentByIdSalesPayment($idSalesPayment);
 
+        if ($salesPaymentTransfer === null || $salesPaymentTransfer->getFkSalesOrder()) {
+            return '';
+        }
+
         $paymentPayoneTransfer = $this->findPaymentPayoneByIdSalesOrder($salesPaymentTransfer->getFkSalesOrder());
 
-        if ($paymentPayoneTransfer->getTransactionId() === null) {
+        if ($paymentPayoneTransfer === null || $paymentPayoneTransfer->getTransactionId() === null) {
             return '';
         }
 

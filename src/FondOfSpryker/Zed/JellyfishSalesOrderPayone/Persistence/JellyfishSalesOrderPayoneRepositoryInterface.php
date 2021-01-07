@@ -12,18 +12,18 @@ interface JellyfishSalesOrderPayoneRepositoryInterface
      *
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      *
-     * @return \Generated\Shared\Transfer\SalesPaymentTransfer
+     * @return \Generated\Shared\Transfer\SalesPaymentTransfer|null
      */
-    public function findSalesPaymentByIdSalesPayment(int $idSalesPayment): SalesPaymentTransfer;
+    public function findSalesPaymentByIdSalesPayment(int $idSalesPayment): ?SalesPaymentTransfer;
 
     /**
      * @param int $idSalesOrder
      *
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      *
-     * @return \Generated\Shared\Transfer\PayonePaymentTransfer
+     * @return \Generated\Shared\Transfer\PayonePaymentTransfer|null
      */
-    public function findPaymentPayoneByIdSalesOrder(int $idSalesOrder): PayonePaymentTransfer;
+    public function findPaymentPayoneByIdSalesOrder(int $idSalesOrder): ?PayonePaymentTransfer;
 
     /**
      * @param int $idSalesPayment
